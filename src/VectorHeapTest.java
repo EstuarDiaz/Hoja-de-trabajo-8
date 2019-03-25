@@ -35,7 +35,7 @@ class VectorHeapTest {
 		// el paciente 2 es el de mayor prioridad que entro primero
 		heap.remove();
 		// cuando el paciente 2 sale, le toca turno al paciente 4
-		assertEquals(heap.getFirst(),paciente4);
+		assertEquals(heap.remove(),paciente4);
 	}
 
 }

@@ -4,13 +4,19 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 {
 
 	protected Vector<E> data; // the data, kept in heap order
-
+	/**
+	 * Constructor Constuye la implementacion del VectorHeap vacia
+	 */
 	public VectorHeap()
 	// post: constructs a new priority queue
 	{
 		data = new Vector<E>();
 	}
 
+	/**
+	 * Constructor Constuye la implementacion del VectorHeap basado en un vector sin ordenar
+	 * @param v El vector con los objetos a guardar en el heap
+	 */
 	public VectorHeap(Vector<E> v)
 	// post: constructs a new priority queue from an unordered vector
 	{
@@ -21,6 +27,12 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 			add(v.get(i));
 		}
 	}
+	
+	/**
+	 * Devuelve la posicion del padre del nodo en la posicion indicada
+	 * @param i posicion del nodo a hacer referencia
+	 * @return int posicion del padre del nodo
+	 */
 	protected static int parent(int i)
 	// pre: 0 <= i < size
 	// post: returns parent of node at location i
@@ -28,6 +40,11 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		return (i-1)/2;
 	}
 
+	/**
+	 * Devuelve la posicion del nodo izquierdo del nodo en la posicion indicada
+	 * @param i posicion del nodo a hacer referencia
+	 * @return int posicion del nodo izquierdo del nodo
+	 */
 	protected static int left(int i)
 	// pre: 0 <= i < size
 	// post: returns index of left child of node at location i
@@ -35,6 +52,11 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		return 2*i+1;
 	}
 
+	/**
+	 * Devuelve la posicion del nodo derecho del nodo en la posicion indicada
+	 * @param i posicion del nodo a hacer referencia
+	 * @return int posicion del nodo derecho del nodo
+	 */
 	protected static int right(int i)
 	// pre: 0 <= i < size
 	// post: returns index of right child of node at location i
@@ -42,6 +64,10 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		return (2*i+1) + 1;
 	}
 
+	/**
+	 * Mueve el nodo hoja en la posiciono indicada a la posicion correspondiente
+	 * @param leaf la posicion de la hoja
+	 */
 	protected void percolateUp(int leaf)
 	// pre: 0 <= leaf < size
 	// post: moves node at index leaf up to appropriate position
@@ -58,6 +84,9 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		data.set(leaf,value);
 	}
 
+	/**
+	 * Agrega un valor al heap, segun prioridad y orden de entrada
+	 */
 	public void add(E value)
 	// pre: value is non-null comparable
 	// post: value is added to priority queue
@@ -66,6 +95,10 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		percolateUp(data.size()-1);
 	}
 
+	/**
+	 * Mueve el nodo raiz abajo en el arbol
+	 * @param root La posicion del nodo raiz en discordia
+	 */
 	protected void pushDownRoot(int root)
 	// pre: 0 <= root < size
 	// post: moves node at index root down
@@ -100,6 +133,9 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		}
 	}
 
+	/**
+	 * Devuelve el elemento con menor valor y lo quita del heap
+	 */
 	public E remove()
 	// pre: !isEmpty()
 	// post: returns and removes minimum value from queue
@@ -110,25 +146,39 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E>
 		if (data.size() > 1) pushDownRoot(0);
 		return minVal;
 	}
-
+	
+	/**
+	 * Devuelve el elemento con mayor prioridad en la cola
+	 */
 	@Override
 	public E getFirst() {
 		// TODO Auto-generated method stub
 		return data.firstElement();
 	}
 
+	/**
+	 * Chequear si el heap tiene elementos
+	 * @return boolean true si y solo si el heap no tiene elementos
+	 */
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return data.isEmpty();
 	}
 
+	/**
+	 * Obtener el tamanio del heap
+	 * @return int tamanio
+	 */
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
 		return data.size();
 	}
 
+	/**
+	 * Borrar todos los elementos del heap
+	 */
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
